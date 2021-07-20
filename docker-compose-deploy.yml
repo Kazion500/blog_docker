@@ -1,0 +1,21 @@
+version: '3'
+
+services: 
+    blog:
+        build: 
+            context: .
+        volumes: 
+            - static_data:/blog/web
+        
+    nginx:
+        build:
+            context: ./nginx
+        volumes: 
+            - static_data:/blog/web
+        ports: 
+            - "8080:8080"
+        depends_on: 
+            - blog
+       
+volumes: 
+    static_data:

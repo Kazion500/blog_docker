@@ -1,0 +1,26 @@
+version: '3'
+
+services: 
+    django_blog:
+        build: 
+            context: .
+        ports:
+            - "8000:8000"
+        volumes: 
+            - static:/static
+
+    nginx_server:
+        build: ./nginx
+            
+        volumes: 
+            - static:/static
+        depends_on: 
+            - django_blog
+        ports: 
+            - "80:80"
+       
+        
+
+
+volumes: 
+    static:
